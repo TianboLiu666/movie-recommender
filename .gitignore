@@ -8,7 +8,8 @@
 
 # testing
 /coverage
-prepara_data.ipynb
+/data/*.ipynb
+/data/*.csv
 .ipynb_checkpoints
 
 # next.js
