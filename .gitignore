@@ -8,10 +8,13 @@
 
 # testing
 /coverage
+prepara_data.ipynb
+.ipynb_checkpoints
 
 # next.js
 /.next/
 /out/
+.env
 
 # production
 /build
