@@ -1,11 +1,12 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import { migrate } from 'drizzle-orm/postgres-js/migrator';
-import postgres from 'postgres';
+import { drizzle } from "drizzle-orm/postgres-js";
+import { migrate } from "drizzle-orm/postgres-js/migrator";
+import postgres from "postgres";
 // for migrations
 // const migrationClient = postgres("postgresql://tianboliu:qwer@localhost:5433/tianboliu", { max: 1 });
 // migrate(drizzle(migrationClient))
 // for query purposes
-const queryClient = postgres("postgresql://tianboliu:qwer@localhost:5433/tianboliu");
+const queryClient = postgres(process.env.DATABASE_URL!);
+// const queryClient = postgres("postgresql://tianboliu:qwer@localhost:5433/tianboliu");
 export const db = drizzle(queryClient);
 
 // const { Client} = require('pg')
