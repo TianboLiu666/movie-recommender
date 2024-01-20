@@ -10,7 +10,6 @@
 /coverage
 data/*.ipynb
 data/*.csv
-/data
 .ipynb_checkpoints
 
 # next.js
