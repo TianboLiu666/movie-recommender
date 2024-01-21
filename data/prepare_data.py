@@ -11,11 +11,7 @@ year_after = 2016  # take the movie data from this year forward
 save_embedding = True
 filename = os.path.join(os.path.dirname(__file__), "movies.csv")
 
-OPENAI_API_KEY = "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"
-# DATABASE_URL = "postgresql://tianboliu:qwer@localhost:5433/tianboliu"
-
-os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
-# os.environ["DATABASE_URL"] = process.env.DATABASE_URL
+OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 DATABASE_URL = os.environ["DATABASE_URL"]
 
 client = OpenAI()
