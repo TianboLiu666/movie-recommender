@@ -1,3 +1,8 @@
+# Before running the
+# We use the following two datasets from Kaggle:
+# 48,000+ movies dataset (https://www.kaggle.com/datasets/yashgupta24/48000-movies-dataset)
+# Wikipedia Movie Plots (https://www.kaggle.com/datasets/jrobischon/wikipedia-movie-plots)
+
 import os
 from tqdm import tqdm
 import time
@@ -7,17 +12,16 @@ from openai import OpenAI  # !pip install openai
 import psycopg  # !pip install "psycopg[binary]"
 
 
-year_after = 2016  # take the movie data from this year forward
-save_embedding = True
-filename = os.path.join(os.path.dirname(__file__), "movies.csv")
+year_after = 1970  # take the movie data from this year forward
+save_embedding = True # Save the vectors or not ?
+filename = os.path.join(os.path.dirname(__file__), "movies.csv") # if save, where to save
 
-OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
+OPENAI_API_KEY = os.environ["OPENAI_API_KEY"] # 
 DATABASE_URL = os.environ["DATABASE_URL"]
 
 client = OpenAI()
 
 moviesfile = os.path
-#  os.path.join(os.path.dirname(__file__), file)
 
 # Read movies data
 movies = pd.read_csv(
@@ -57,7 +61,7 @@ inner_merge["embedding"] = ""
 print("Starting embedding.....")
 t0 = time.time()
 for index, row in tqdm(inner_merge.iterrows()):
-    text = row["Plot"] + row["Description"]
+    text = str(row["Plot"]) + str(row["Description"])
     em = getEmbedding(text)
     inner_merge["embedding"][index] = em
 t1 = time.time()
@@ -67,10 +71,11 @@ if save_embedding:
     inner_merge.to_csv(filename)
     print(f"Saved data into {filename}")
 
-
+print("Starting storing data.....")
+t2 = time.time()
 with psycopg.connect(DATABASE_URL) as conn:
     conn.execute("CREATE EXTENSION if not exists vector")
-    conn.execute("DROP TABLE if exists movies")
+    # conn.execute("DROP TABLE if exists movies")
 
     conn.execute(
         """
@@ -120,3 +125,5 @@ with psycopg.connect(DATABASE_URL) as conn:
         )
 
     conn.commit()
+t3 = time.time()
+print(f"Finished data storage. total time use {t3-t2}")
