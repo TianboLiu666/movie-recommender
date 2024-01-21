@@ -1,7 +1,7 @@
 # Movie Recommendation
 
 This is a movie search and recommendation engine using Next.js for an enhanced user experience.
-- Embedded movie summaries and plots from Kaggle using the OpenAI API. Implemented data 
+- Embedded movie summaries and plots from Kaggle using the OpenAI API.
 - Store movie informations and embeddings to a vector Database.  I will use Neon database with PostgreSQL database extension PGvector.
 - Title and content search functionalities are realized using kNN with cosine similarit
 
@@ -12,10 +12,10 @@ pip install openai pandas psycopg
 ```
 
 - [openai](https://openai.com) for embedding movie descriptions and plot
-- [pandas](https://pandas.pydata.org/)
-- [psycopg](https://www.psycopg.org/) for data storage and its extension PGVector
+- [pandas](https://pandas.pydata.org/) To clean the downloaded movie data(csv would also work)
+- [psycopg](https://www.psycopg.org/) for data storage and its extension PGVector(other vector database also ok)
 
-Sink data into database.  Run
+### Sink data into database.  Run
 
 ```
 python data/prepare_data.py
